@@ -16,11 +16,13 @@ with app.app_context():
 
 @app.route("/")
 def index():
+    form = TaskForm()
     tasks = Task.query.all()
     return render_template("index.html", tasks=tasks)
 
 @app.route("/add", methods=["GET", "POST"])
 def add_task():
+
     form = TaskForm()
     if form.validate_on_submit():
         new_task = Task(
